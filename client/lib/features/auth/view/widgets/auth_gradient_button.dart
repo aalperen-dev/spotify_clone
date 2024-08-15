@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+
 import 'package:spotify/core/theme/app_palette.dart';
 
 class AuthGradientButton extends StatelessWidget {
-  const AuthGradientButton({super.key});
+  final String buttonText;
+  final VoidCallback onPressed;
+  const AuthGradientButton({
+    super.key,
+    required this.buttonText,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +31,10 @@ class AuthGradientButton extends StatelessWidget {
           backgroundColor: Pallete.transparentColor,
           shadowColor: Pallete.transparentColor,
         ),
-        onPressed: () {},
-        child: const Text(
-          "Sign Up",
-          style: TextStyle(
+        onPressed: onPressed,
+        child: Text(
+          buttonText,
+          style: const TextStyle(
             fontSize: 17,
             fontWeight: FontWeight.w600,
           ),

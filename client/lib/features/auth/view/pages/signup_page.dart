@@ -63,9 +63,12 @@ class _SignupPageState extends State<SignupPage> {
                   isObscureText: true,
                 ),
                 //
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20),
-                  child: AuthGradientButton(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: AuthGradientButton(
+                    buttonText: 'Sign Up!',
+                    onPressed: () {},
+                  ),
                 ),
                 //
                 RichText(
