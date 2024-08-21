@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spotify/core/theme/app_palette.dart';
+import 'package:spotify/features/auth/repositories/auth_remote_repository.dart';
 import 'package:spotify/features/auth/view/widgets/auth_gradient_button.dart';
 import 'package:spotify/features/auth/view/widgets/custom_textformfield.dart';
 
@@ -53,7 +54,7 @@ class _SignupPageState extends State<SignupPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 15),
                   child: CustomTextFormField(
-                    hintText: 'E - mail',
+                    hintText: 'E-mail',
                     controller: emailController,
                   ),
                 ),
@@ -67,7 +68,13 @@ class _SignupPageState extends State<SignupPage> {
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   child: AuthGradientButton(
                     buttonText: 'Sign Up!',
-                    onPressed: () {},
+                    onPressed: () async {
+                      await AuthRemoteRepository().signup(
+                        name: nameController.text,
+                        email: emailController.text,
+                        password: passwordController.text,
+                      );
+                    },
                   ),
                 ),
                 //
