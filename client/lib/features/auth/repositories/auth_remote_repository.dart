@@ -1,28 +1,60 @@
 import 'dart:convert';
 
+import 'package:fpdart/fpdart.dart';
 import 'package:http/http.dart' as http;
+import 'package:spotify/core/failure/app_failure.dart';
+import 'package:spotify/features/auth/model/user_model.dart';
 
 class AuthRemoteRepository {
-  Future<void> signup({
+  Future<Either<AppFailureMsg, UserModel>> signup({
     required String name,
     required String email,
     required String password,
   }) async {
-    final response = await http.post(
-      Uri.parse(
-        'http://10.0.2.2:8000/auth/signup',
-      ),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({
-        'name': name,
-        'email': email,
-        'password': password,
-      }),
-    );
-    print(response);
-    print(response.body);
-    print(response.statusCode);
+    try {
+      final response = await http.post(
+        Uri.parse(
+          'http://10.0.2.2:8000/auth/signup',
+        ),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'name': name,
+          'email': email,
+          'password': password,
+        }),
+      );
+      final resBodyMap = jsonDecode(response.body) as Map<String, dynamic>;
+      if (response.statusCode != 201) {
+        // error handling
+        return Left(AppFailureMsg(resBodyMap['details']));
+      }
+
+      // return Right(UserModel.fromJson(response.body));
+      return Right(UserModel.fromMap(resBodyMap));
+    } catch (e) {
+      return Left(AppFailureMsg(e.toString()));
+    }
   }
 
-  Future<void> login() async {}
+  Future<void> login({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final response = await http.post(
+        Uri.parse(
+          'http://10.0.2.2:8000/auth/login',
+        ),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'email': email,
+          'password': password,
+        }),
+      );
+      print(response.body);
+      print(response.statusCode);
+    } catch (e) {
+      print(e);
+    }
+  }
 }

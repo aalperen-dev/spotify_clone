@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:spotify/core/theme/app_palette.dart';
 import 'package:spotify/features/auth/repositories/auth_remote_repository.dart';
+import 'package:spotify/features/auth/view/pages/login_page.dart';
 import 'package:spotify/features/auth/view/widgets/auth_gradient_button.dart';
 import 'package:spotify/features/auth/view/widgets/custom_textformfield.dart';
 
@@ -69,27 +71,43 @@ class _SignupPageState extends State<SignupPage> {
                   child: AuthGradientButton(
                     buttonText: 'Sign Up!',
                     onPressed: () async {
-                      await AuthRemoteRepository().signup(
+                      final res = await AuthRemoteRepository().signup(
                         name: nameController.text,
                         email: emailController.text,
                         password: passwordController.text,
                       );
+                      print(res);
+
+                      final val = switch (res) {
+                        Left(value: final l) => l,
+                        Right(value: final r) => r.name,
+                      };
+                      print(val);
                     },
                   ),
                 ),
                 //
-                RichText(
-                  text: TextSpan(
-                    style: Theme.of(context).textTheme.titleMedium,
-                    text: 'Already have an account? ',
-                    children: const [
-                      TextSpan(
-                        text: 'Sign in!',
-                        style: TextStyle(
-                          color: Pallete.gradient2,
-                        ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const LoginPage(),
                       ),
-                    ],
+                    );
+                  },
+                  child: RichText(
+                    text: TextSpan(
+                      style: Theme.of(context).textTheme.titleMedium,
+                      text: 'Already have an account? ',
+                      children: const [
+                        TextSpan(
+                          text: 'Sign in!',
+                          style: TextStyle(
+                            color: Pallete.gradient2,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:spotify/core/theme/app_palette.dart';
+import 'package:spotify/features/auth/repositories/auth_remote_repository.dart';
+import 'package:spotify/features/auth/view/pages/signup_page.dart';
 import 'package:spotify/features/auth/view/widgets/auth_gradient_button.dart';
 import 'package:spotify/features/auth/view/widgets/custom_textformfield.dart';
 
@@ -61,22 +63,36 @@ class _LoginPageState extends State<LoginPage> {
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   child: AuthGradientButton(
                     buttonText: 'Sign in!',
-                    onPressed: () {},
+                    onPressed: () async {
+                      await AuthRemoteRepository().login(
+                        email: emailController.text,
+                        password: passwordController.text,
+                      );
+                    },
                   ),
                 ),
                 //
-                RichText(
-                  text: TextSpan(
-                    style: Theme.of(context).textTheme.titleMedium,
-                    text: 'Don\'t have an account? ',
-                    children: const [
-                      TextSpan(
-                        text: 'Sign up!',
-                        style: TextStyle(
-                          color: Pallete.gradient2,
-                        ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const SignupPage(),
                       ),
-                    ],
+                    );
+                  },
+                  child: RichText(
+                    text: TextSpan(
+                      style: Theme.of(context).textTheme.titleMedium,
+                      text: 'Don\'t have an account? ',
+                      children: const [
+                        TextSpan(
+                          text: 'Sign up!',
+                          style: TextStyle(
+                            color: Pallete.gradient2,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
