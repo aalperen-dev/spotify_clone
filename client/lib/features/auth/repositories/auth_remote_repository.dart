@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:fpdart/fpdart.dart';
 import 'package:http/http.dart' as http;
+import 'package:spotify/core/constants/server_constants.dart';
 import 'package:spotify/core/failure/app_failure.dart';
 import 'package:spotify/features/auth/model/user_model.dart';
 
@@ -14,7 +15,7 @@ class AuthRemoteRepository {
     try {
       final response = await http.post(
         Uri.parse(
-          'http://10.0.2.2:8000/auth/signup',
+          '${ServerConstants.serverUrl}/auth/signup',
         ),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
@@ -36,14 +37,14 @@ class AuthRemoteRepository {
     }
   }
 
-  Future<void> login({
+  Future<Either<AppFailureMsg, UserModel>> login({
     required String email,
     required String password,
   }) async {
     try {
       final response = await http.post(
         Uri.parse(
-          'http://10.0.2.2:8000/auth/login',
+          '${ServerConstants.serverUrl}/auth/login',
         ),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
@@ -51,10 +52,13 @@ class AuthRemoteRepository {
           'password': password,
         }),
       );
-      print(response.body);
-      print(response.statusCode);
+      final resBodyMap = jsonDecode(response.body) as Map<String, dynamic>;
+      if (response.statusCode != 200) {
+        return Left(AppFailureMsg(resBodyMap['detail']));
+      }
+      return Right(UserModel.fromMap(resBodyMap));
     } catch (e) {
-      print(e);
+      return Left(AppFailureMsg(e.toString()));
     }
   }
 }
