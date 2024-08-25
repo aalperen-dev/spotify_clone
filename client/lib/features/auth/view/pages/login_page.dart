@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:spotify/core/theme/app_palette.dart';
+import 'package:spotify/core/utilities/utilities.dart';
 import 'package:spotify/features/auth/repositories/auth_remote_repository.dart';
 import 'package:spotify/features/auth/view/pages/signup_page.dart';
 import 'package:spotify/features/auth/view/widgets/auth_gradient_button.dart';
@@ -46,13 +47,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             // );
           },
           error: (error, stackTrace) {
-            ScaffoldMessenger.of(context)
-              ..hideCurrentMaterialBanner()
-              ..showSnackBar(
-                SnackBar(
-                  content: Text(error.toString()),
-                ),
-              );
+            AppUtilities.showSnackBar(
+                context: context, content: error.toString());
           },
           loading: () {},
         );
