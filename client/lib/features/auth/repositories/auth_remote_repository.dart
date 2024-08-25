@@ -2,9 +2,17 @@ import 'dart:convert';
 
 import 'package:fpdart/fpdart.dart';
 import 'package:http/http.dart' as http;
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:spotify/core/constants/server_constants.dart';
 import 'package:spotify/core/failure/app_failure.dart';
 import 'package:spotify/features/auth/model/user_model.dart';
+
+part 'auth_remote_repository.g.dart';
+
+@riverpod
+AuthRemoteRepository authRemoteRepository(AuthRemoteRepositoryRef ref) {
+  return AuthRemoteRepository();
+}
 
 class AuthRemoteRepository {
   Future<Either<AppFailureMsg, UserModel>> signup({
@@ -56,7 +64,8 @@ class AuthRemoteRepository {
       if (response.statusCode != 200) {
         return Left(AppFailureMsg(resBodyMap['detail']));
       }
-      return Right(UserModel.fromMap(resBodyMap));
+      return Right(UserModel.fromMap(resBodyMap['user'])
+          .copyWith(token: resBodyMap['token']));
     } catch (e) {
       return Left(AppFailureMsg(e.toString()));
     }

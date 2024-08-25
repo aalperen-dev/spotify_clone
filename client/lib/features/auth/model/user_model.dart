@@ -4,22 +4,26 @@ class UserModel {
   final String id;
   final String email;
   final String name;
+  final String token;
 
   UserModel({
     required this.id,
     required this.email,
     required this.name,
+    required this.token,
   });
 
   UserModel copyWith({
     String? id,
     String? email,
     String? name,
+    String? token,
   }) {
     return UserModel(
       id: id ?? this.id,
       email: email ?? this.email,
       name: name ?? this.name,
+      token: token ?? this.token,
     );
   }
 
@@ -28,6 +32,7 @@ class UserModel {
       'id': id,
       'email': email,
       'name': name,
+      'token': token,
     };
   }
 
@@ -36,6 +41,7 @@ class UserModel {
       id: map['id'] ?? '',
       email: map['email'] ?? '',
       name: map['name'] ?? '',
+      token: map['token'] ?? '',
     );
   }
 
@@ -45,7 +51,9 @@ class UserModel {
       UserModel.fromMap(json.decode(source));
 
   @override
-  String toString() => 'UserModel(id: $id, email: $email, name: $name)';
+  String toString() {
+    return 'UserModel(id: $id, email: $email, name: $name, token: $token)';
+  }
 
   @override
   bool operator ==(Object other) {
@@ -54,9 +62,12 @@ class UserModel {
     return other is UserModel &&
         other.id == id &&
         other.email == email &&
-        other.name == name;
+        other.name == name &&
+        other.token == token;
   }
 
   @override
-  int get hashCode => id.hashCode ^ email.hashCode ^ name.hashCode;
+  int get hashCode {
+    return id.hashCode ^ email.hashCode ^ name.hashCode ^ token.hashCode;
+  }
 }

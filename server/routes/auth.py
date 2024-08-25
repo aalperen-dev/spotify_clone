@@ -2,6 +2,7 @@ import uuid
 
 import bcrypt
 from fastapi import APIRouter, Depends, HTTPException
+import jwt
 from sqlalchemy.orm import Session
 
 from database import get_db
@@ -36,7 +37,13 @@ def signup_user(user: UserCreate, db: Session = Depends(get_db)):
     db.add(user_db)
     db.commit()
     db.refresh(user_db)
-    return user_db
+
+    token = jwt.encode({"id": user_db.id}, "password_key")
+
+    return {
+        "token": token,
+        "user": user_db,
+    }
 
 
 @router.post("/login")
