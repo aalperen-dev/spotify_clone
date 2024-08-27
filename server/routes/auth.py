@@ -1,12 +1,11 @@
-from enum import verify
 import uuid
-
 import bcrypt
-from fastapi import APIRouter, Depends, HTTPException, Header
+from fastapi import APIRouter, Depends, HTTPException
 import jwt
 from sqlalchemy.orm import Session
 
 from database import get_db
+from middleware.auth_middleware import auth_middleware
 from models.user_model import User
 from pydantic_schemas.user_create import UserCreate
 from pydantic_schemas.user_login import UserLogin
@@ -55,31 +54,25 @@ def login_user(user: UserLogin, db: Session = Depends(get_db)):
     if not user_db:
         raise HTTPException(400, "User with email does not exists!")
 
+    # checking if passwords are matching or not
     is_match = bcrypt.checkpw(user.password.encode(), user_db.password)
 
     if not is_match:
         raise HTTPException(400, "Incorrect password!")
 
+    token = jwt.encode({"id": user_db.id}, "password_key")
     return user_db
 
 
 @router.get("/")
-def current_user_data(db: Session = Depends(get_db), x_auth_token=Header()):
-    try:
-        # get user token
-        if not x_auth_token:
-            raise HTTPException(401, "No auth token. Access Denied!")
+def current_user_data(
+    db: Session = Depends(get_db),
+    user_dict=Depends(auth_middleware),
+):
 
-        # decode token
-        verified_token = jwt.decode(x_auth_token, "password_key", ["HS256"])
+    user = db.query(User).filter(User.id == user_dict["uid"]).first()
 
-        if not verified_token:
-            raise HTTPException(401, "Token verification failed. Authorization Denied!")
+    if not user:
+        raise HTTPException(404, "User not found!")
 
-        # get id from the token
-        uid = verified_token.get("id")
-        return uid
-
-        # get user info from db
-    except jwt.PyJWKError:
-        raise HTTPException(401, "Token is not valid. Authorization Failed!")
+    return user
