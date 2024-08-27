@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fpdart/fpdart.dart';
 import 'package:spotify/core/theme/app_palette.dart';
 import 'package:spotify/core/utilities/utilities.dart';
-import 'package:spotify/features/auth/repositories/auth_remote_repository.dart';
 import 'package:spotify/features/auth/view/pages/signup_page.dart';
 import 'package:spotify/features/auth/view/widgets/auth_gradient_button.dart';
 import 'package:spotify/features/auth/view/widgets/custom_textformfield.dart';
+import 'package:spotify/features/home/view/pages/home_page.dart';
 
 import '../../../../core/widgets/app_loader.dart';
 import '../../viewmodel/auth_viewmodel.dart';
@@ -32,19 +31,20 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final isLoading = ref.watch(authViewModelProvider)?.isLoading == true;
-
+    final isLoading = ref.watch(authViewModelProvider.select(
+      (value) => value?.isLoading == true,
+    ));
     ref.listen(
       authViewModelProvider,
       (_, next) {
         next?.when(
           data: (data) {
-            // TODO: navigate to home page
-            // Navigator.of(context).push(
-            //   MaterialPageRoute(
-            //     builder: (context) => const LoginPage(),
-            //   ),
-            // );
+            Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                builder: (context) => const HomePage(),
+              ),
+              (_) => false,
+            );
           },
           error: (error, stackTrace) {
             AppUtilities.showSnackBar(
@@ -95,15 +95,19 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         child: AuthGradientButton(
                           buttonText: 'Sign in!',
                           onPressed: () async {
-                            final res = await AuthRemoteRepository().login(
-                              email: emailController.text,
-                              password: passwordController.text,
-                            );
-
-                            final val = switch (res) {
-                              Left(value: final l) => l,
-                              Right(value: final r) => r,
-                            };
+                            if (formKey.currentState!.validate()) {
+                              await ref
+                                  .read(authViewModelProvider.notifier)
+                                  .loginUser(
+                                    email: emailController.text,
+                                    password: passwordController.text,
+                                  );
+                            } else {
+                              AppUtilities.showSnackBar(
+                                context: context,
+                                content: 'Missing fields!',
+                              );
+                            }
                           },
                         ),
                       ),
