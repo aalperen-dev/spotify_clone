@@ -5,6 +5,7 @@ import 'package:spotify/core/theme/theme.dart';
 import 'package:spotify/features/auth/view/pages/signup_page.dart';
 import 'package:spotify/features/auth/viewmodel/auth_viewmodel.dart';
 import 'package:spotify/features/home/view/pages/home_page.dart';
+import 'package:spotify/features/home/view/pages/upload_song_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,7 +30,8 @@ class MainApp extends ConsumerWidget {
     return MaterialApp(
       title: 'Spotify Clone',
       theme: AppTheme.darkThemeMode,
-      home: currentUser == null ? const SignupPage() : const HomePage(),
+      // home: currentUser == null ? const SignupPage() : const UploadSongPage(),
+      home: const UploadSongPage(),
     );
   }
 }
