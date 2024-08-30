@@ -4,7 +4,7 @@ import 'package:spotify/core/theme/app_palette.dart';
 import 'package:spotify/core/widgets/app_loader.dart';
 import 'package:spotify/features/auth/view/pages/login_page.dart';
 import 'package:spotify/features/auth/view/widgets/auth_gradient_button.dart';
-import 'package:spotify/features/auth/view/widgets/custom_textformfield.dart';
+import 'package:spotify/core/widgets/custom_textformfield.dart';
 import 'package:spotify/features/auth/viewmodel/auth_viewmodel.dart';
 
 import '../../../../core/utilities/utilities.dart';
