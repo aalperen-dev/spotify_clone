@@ -33,7 +33,7 @@ class AppUtilities {
   static Future<File?> pickImage() async {
     try {
       final filePickerRes =
-          await FilePicker.platform.pickFiles(type: FileType.image);
+          await FilePicker.platform.pickFiles(type: FileType.media);
       if (filePickerRes != null) {
         return File(filePickerRes.files.first.xFile.path);
       }

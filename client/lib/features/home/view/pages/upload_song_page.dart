@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spotify/core/theme/app_palette.dart';
 import 'package:spotify/core/utilities/utilities.dart';
 import 'package:spotify/core/widgets/custom_textformfield.dart';
+import 'package:spotify/features/home/view/widgets/audio_wave.dart';
 
 class UploadSongPage extends ConsumerStatefulWidget {
   const UploadSongPage({super.key});
@@ -107,12 +108,14 @@ class _UploadSongPageState extends ConsumerState<UploadSongPage> {
               //
               const SizedBox(height: 40),
               //
-              CustomTextFormField(
-                onTap: selectAudio,
-                hintText: 'Pick song.',
-                controller: null,
-                isReadOnly: true,
-              ),
+              selectedAudio != null
+                  ? AudioWave(path: selectedAudio!.path)
+                  : CustomTextFormField(
+                      onTap: selectAudio,
+                      hintText: 'Pick song.',
+                      controller: null,
+                      isReadOnly: true,
+                    ),
               //
               const SizedBox(height: 20),
               //
