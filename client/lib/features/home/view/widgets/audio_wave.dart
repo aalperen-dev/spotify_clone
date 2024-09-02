@@ -1,6 +1,7 @@
 import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:spotify/core/theme/app_palette.dart';
 
 class AudioWave extends StatefulWidget {
