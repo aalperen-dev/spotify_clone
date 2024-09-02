@@ -42,4 +42,12 @@ class AppUtilities {
       return null;
     }
   }
+
+  static String rgbToHex({required Color color}) {
+    return '${color.red.toRadixString(16).padLeft(2, '0')}${color.green.toRadixString(16).padLeft(2, '0')}${color.blue.toRadixString(16).padLeft(2, '0')}';
+  }
+
+  static Color hexToColor({required String hex}) {
+    return Color(int.parse(hex, radix: 16) + 0xFF000000);
+  }
 }
