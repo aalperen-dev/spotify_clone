@@ -31,7 +31,7 @@ class MainApp extends ConsumerWidget {
       title: 'Spotify Clone',
       theme: AppTheme.darkThemeMode,
       // home: currentUser == null ? const SignupPage() : const UploadSongPage(),
-      home: const UploadSongPage(),
+      home: const HomePage(),
     );
   }
 }
