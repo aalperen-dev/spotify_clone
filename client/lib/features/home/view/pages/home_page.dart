@@ -23,9 +23,6 @@ class _HomePageState extends ConsumerState<HomePage> {
   Widget build(BuildContext context) {
     final user = ref.watch(currentUserNotifierProvider);
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Title'),
-      ),
       body: pages[selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: selectedIndex,
