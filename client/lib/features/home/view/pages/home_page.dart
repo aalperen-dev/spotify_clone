@@ -4,6 +4,7 @@ import 'package:spotify/core/providers/current_user_notifier.dart';
 import 'package:spotify/core/theme/app_palette.dart';
 import 'package:spotify/features/home/view/pages/library_page.dart';
 import 'package:spotify/features/home/view/pages/song_page.dart';
+import 'package:spotify/features/home/view/widgets/music_slab.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -23,7 +24,15 @@ class _HomePageState extends ConsumerState<HomePage> {
   Widget build(BuildContext context) {
     final user = ref.watch(currentUserNotifierProvider);
     return Scaffold(
-      body: pages[selectedIndex],
+      body: Stack(
+        children: [
+          pages[selectedIndex],
+          const Positioned(
+            bottom: 0,
+            child: MusicSlab(),
+          ),
+        ],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: selectedIndex,
         onTap: (value) {
