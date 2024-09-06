@@ -19,11 +19,29 @@ class MusicSlab extends ConsumerWidget {
 
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) {
-            return const MusicPlayer();
-          },
-        ));
+        Navigator.of(context).push(
+          PageRouteBuilder(
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              final tween = Tween(
+                begin: const Offset(0, 1),
+                end: Offset.zero,
+              ).chain(
+                CurveTween(curve: Curves.easeIn),
+              );
+
+              final offsetAnimation = animation.drive(tween);
+
+              return SlideTransition(
+                position: offsetAnimation,
+                child: child,
+              );
+            },
+            pageBuilder: (context, animation, secondaryAnimation) {
+              return const MusicPlayer();
+            },
+          ),
+        );
       },
       child: Stack(
         children: [
@@ -41,14 +59,17 @@ class MusicSlab extends ConsumerWidget {
                 Row(
                   children: [
                     //
-                    Container(
-                      margin: const EdgeInsets.only(right: 8),
-                      width: 48,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: NetworkImage(currentSong.thumbnail_url),
+                    Hero(
+                      tag: 'music-image',
+                      child: Container(
+                        margin: const EdgeInsets.only(right: 8),
+                        width: 48,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(4),
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(currentSong.thumbnail_url),
+                          ),
                         ),
                       ),
                     ),
