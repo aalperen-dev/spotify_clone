@@ -24,14 +24,16 @@ class _HomePageState extends ConsumerState<HomePage> {
   Widget build(BuildContext context) {
     final user = ref.watch(currentUserNotifierProvider);
     return Scaffold(
-      body: Stack(
-        children: [
-          pages[selectedIndex],
-          const Positioned(
-            bottom: 0,
-            child: MusicSlab(),
-          ),
-        ],
+      body: SingleChildScrollView(
+        child: Stack(
+          children: [
+            pages[selectedIndex],
+            const Positioned(
+              bottom: 0,
+              child: MusicSlab(),
+            ),
+          ],
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: selectedIndex,
