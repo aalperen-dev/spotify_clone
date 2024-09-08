@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spotify/core/providers/current_song_notifier.dart';
 import 'package:spotify/core/theme/app_palette.dart';
+import 'package:spotify/core/utilities/utilities.dart';
 import 'package:spotify/core/widgets/app_loader.dart';
 import 'package:spotify/features/home/viewmodel/home_viewmodel.dart';
 
@@ -13,7 +14,22 @@ class SongsPage extends ConsumerWidget {
     final recentlyPlayedSongs =
         ref.watch(homeViewModelProvider.notifier).getRecentlyPlayedSongs();
 
-    return SafeArea(
+    final currentSong = ref.watch(currentSongNotifierProvider);
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 500),
+      decoration: currentSong == null
+          ? null
+          : BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                stops: const [0.0, 0.3],
+                colors: [
+                  AppUtilities.hexToColor(hex: currentSong.hex_code),
+                  Pallete.transparentColor,
+                ],
+              ),
+            ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
