@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spotify/core/providers/current_song_notifier.dart';
 import 'package:spotify/core/theme/app_palette.dart';
 import 'package:spotify/core/utilities/utilities.dart';
+import 'package:spotify/features/home/viewmodel/home_viewmodel.dart';
 
 class MusicPlayer extends ConsumerWidget {
   const MusicPlayer({
@@ -100,7 +101,11 @@ class MusicPlayer extends ConsumerWidget {
                       ),
                       //
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          await ref
+                              .read(homeViewModelProvider.notifier)
+                              .favoriteSong(songId: currentSong.id);
+                        },
                         icon: const Icon(
                           Icons.favorite,
                           color: Pallete.whiteColor,
