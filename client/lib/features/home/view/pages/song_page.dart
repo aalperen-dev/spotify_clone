@@ -41,7 +41,7 @@ class SongsPage extends ConsumerWidget {
               bottom: 36,
             ),
             child: SizedBox(
-              height: 280,
+              height: 220,
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                   maxCrossAxisExtent: 200,

@@ -1,16 +1,19 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
+import 'package:spotify/features/home/models/favorite_songs_model.dart';
 
 class UserModel {
   final String id;
   final String email;
   final String name;
   final String token;
-
+  final List<FavoriteSongsModel> favoriteSongs;
   UserModel({
     required this.id,
     required this.email,
     required this.name,
     required this.token,
+    required this.favoriteSongs,
   });
 
   UserModel copyWith({
@@ -18,12 +21,14 @@ class UserModel {
     String? email,
     String? name,
     String? token,
+    List<FavoriteSongsModel>? favoriteSongs,
   }) {
     return UserModel(
       id: id ?? this.id,
       email: email ?? this.email,
       name: name ?? this.name,
       token: token ?? this.token,
+      favoriteSongs: favoriteSongs ?? this.favoriteSongs,
     );
   }
 
@@ -33,6 +38,7 @@ class UserModel {
       'email': email,
       'name': name,
       'token': token,
+      'favoriteSongs': favoriteSongs.map((x) => x.toMap()).toList(),
     };
   }
 
@@ -42,6 +48,8 @@ class UserModel {
       email: map['email'] ?? '',
       name: map['name'] ?? '',
       token: map['token'] ?? '',
+      favoriteSongs: List<FavoriteSongsModel>.from(
+          map['favoriteSongs']?.map((x) => FavoriteSongsModel.fromMap(x))),
     );
   }
 
@@ -52,7 +60,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(id: $id, email: $email, name: $name, token: $token)';
+    return 'UserModel(id: $id, email: $email, name: $name, token: $token, favoriteSongs: $favoriteSongs)';
   }
 
   @override
@@ -63,11 +71,16 @@ class UserModel {
         other.id == id &&
         other.email == email &&
         other.name == name &&
-        other.token == token;
+        other.token == token &&
+        listEquals(other.favoriteSongs, favoriteSongs);
   }
 
   @override
   int get hashCode {
-    return id.hashCode ^ email.hashCode ^ name.hashCode ^ token.hashCode;
+    return id.hashCode ^
+        email.hashCode ^
+        name.hashCode ^
+        token.hashCode ^
+        favoriteSongs.hashCode;
   }
 }

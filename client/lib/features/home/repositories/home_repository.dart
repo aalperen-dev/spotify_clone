@@ -50,7 +50,7 @@ class HomeRepository {
     }
   }
 
-  Future<Either<AppFailureMsg, List<SongModel>>> getSongs({
+  Future<Either<AppFailureMsg, List<SongModel>>> getAllSongs({
     required String token,
   }) async {
     try {
@@ -73,6 +73,62 @@ class HomeRepository {
       resBodyMap = resBodyMap as List;
       for (var map in resBodyMap) {
         songs.add(SongModel.fromMap(map));
+      }
+      return Right(songs);
+    } catch (e) {
+      return Left(AppFailureMsg(e.toString()));
+    }
+  }
+
+  Future<Either<AppFailureMsg, bool>> favoriteSong({
+    required String token,
+    required String songId,
+  }) async {
+    try {
+      final res = await http.post(
+          Uri.parse('${ServerConstants.serverUrl}/song/favorite'),
+          headers: {
+            'Content-type': 'application/json',
+            'x-auth-token': token,
+          },
+          body: jsonEncode({'song_id': songId}));
+
+      var resBodyMap = jsonDecode(res.body);
+
+      if (res.statusCode != 200) {
+        resBodyMap = resBodyMap as Map<String, dynamic>;
+        return Left(AppFailureMsg(resBodyMap['detail']));
+      }
+
+      return Right(resBodyMap['message']);
+    } catch (e) {
+      return Left(AppFailureMsg(e.toString()));
+    }
+  }
+
+  Future<Either<AppFailureMsg, List<SongModel>>> getAllFavoriteSongs({
+    required String token,
+  }) async {
+    try {
+      final res = await http.get(
+        Uri.parse('${ServerConstants.serverUrl}/song/list/favorites'),
+        headers: {
+          'Content-type': 'application/json',
+          'x-auth-token': token,
+        },
+      );
+
+      var resBodyMap = jsonDecode(res.body);
+
+      if (res.statusCode != 200) {
+        resBodyMap = resBodyMap as Map<String, dynamic>;
+        return Left(AppFailureMsg(resBodyMap['detail']));
+      }
+
+      List<SongModel> songs = [];
+      resBodyMap = resBodyMap as List;
+      for (var map in resBodyMap) {
+        songs.add(SongModel.fromMap(map['song']));
       }
       return Right(songs);
     } catch (e) {
