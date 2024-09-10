@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:spotify/core/constants/server_constants.dart';
 import 'package:spotify/core/failure/app_failure.dart';
-import 'package:spotify/features/auth/model/user_model.dart';
+import 'package:spotify/core/models/user_model.dart';
 
 part 'auth_remote_repository.g.dart';
 

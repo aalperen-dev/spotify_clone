@@ -37,7 +37,7 @@ class MainApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentUser = ref.watch(currentUserNotifierProvider);
+    // final currentUser = ref.watch(currentUserNotifierProvider);
     return MaterialApp(
       title: 'Spotify Clone',
       theme: AppTheme.darkThemeMode,

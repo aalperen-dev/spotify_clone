@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:spotify/core/providers/current_user_notifier.dart';
 import 'package:spotify/core/theme/app_palette.dart';
 import 'package:spotify/features/home/view/pages/library_page.dart';
 import 'package:spotify/features/home/view/pages/song_page.dart';
@@ -22,7 +21,6 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final user = ref.watch(currentUserNotifierProvider);
     return Scaffold(
       body: SingleChildScrollView(
         child: Stack(

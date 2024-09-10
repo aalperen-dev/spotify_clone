@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spotify/core/providers/current_song_notifier.dart';
+import 'package:spotify/core/providers/current_user_notifier.dart';
 import 'package:spotify/core/theme/app_palette.dart';
 import 'package:spotify/core/utilities/utilities.dart';
 import 'package:spotify/features/home/viewmodel/home_viewmodel.dart';
@@ -14,6 +15,9 @@ class MusicPlayer extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final currentSong = ref.watch(currentSongNotifierProvider);
     final songNotifier = ref.read(currentSongNotifierProvider.notifier);
+    final userFavorites = ref.watch(currentUserNotifierProvider.select(
+      (value) => value!.favoriteSongs,
+    ));
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -106,8 +110,16 @@ class MusicPlayer extends ConsumerWidget {
                               .read(homeViewModelProvider.notifier)
                               .favoriteSong(songId: currentSong.id);
                         },
-                        icon: const Icon(
-                          Icons.favorite,
+                        icon: Icon(
+                          userFavorites
+                                  .where(
+                                    (element) =>
+                                        element.song_id == currentSong.id,
+                                  )
+                                  .toList()
+                                  .isNotEmpty
+                              ? Icons.favorite
+                              : Icons.favorite_outline,
                           color: Pallete.whiteColor,
                         ),
                       ),

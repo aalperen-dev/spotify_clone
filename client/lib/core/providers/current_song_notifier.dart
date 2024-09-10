@@ -1,3 +1,4 @@
+// ignore_for_file: avoid_public_notifier_properties
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:spotify/features/home/models/song_model.dart';
