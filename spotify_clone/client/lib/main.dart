@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:spotify/core/providers/current_user_notifier.dart';
 import 'package:spotify/core/theme/theme.dart';
 import 'package:spotify/features/auth/viewmodel/auth_viewmodel.dart';
 import 'package:spotify/features/home/view/pages/home_page.dart';
