@@ -24,8 +24,8 @@ During the development of this project, I learned the following technologies and
 
 ### Flutter and Dart
 
-- **Flutter Version**: 3.19.6
-- **Dart Version**: 3.3.4
+- **Flutter Version**: 3.24.0
+- **Dart Version**: 3.5.0
 
 ### Backend
 

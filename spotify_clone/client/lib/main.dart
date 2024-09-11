@@ -3,9 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:spotify/core/providers/current_user_notifier.dart';
 import 'package:spotify/core/theme/theme.dart';
+import 'package:spotify/features/auth/view/pages/signup_page.dart';
 import 'package:spotify/features/auth/viewmodel/auth_viewmodel.dart';
-import 'package:spotify/features/home/view/pages/home_page.dart';
+import 'package:spotify/features/home/view/pages/upload_song_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,12 +38,12 @@ class MainApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final currentUser = ref.watch(currentUserNotifierProvider);
+    final currentUser = ref.watch(currentUserNotifierProvider);
     return MaterialApp(
       title: 'Spotify Clone',
       theme: AppTheme.darkThemeMode,
-      // home: currentUser == null ? const SignupPage() : const UploadSongPage(),
-      home: const HomePage(),
+      home: currentUser == null ? const SignupPage() : const UploadSongPage(),
+      // home: const HomePage(),
     );
   }
 }
