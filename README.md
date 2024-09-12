@@ -37,8 +37,8 @@ During the development of this project, I learned the following technologies and
 
 ## Screenshots
 
-![App Screenshot](https://github.com/aalperen-dev/spotify/blob/main/project_screenshots/signup_screen.png)
-![App Screenshot](https://github.com/aalperen-dev/spotify/blob/main/project_screenshots/signin_screen.png)
+| ![App Screenshot](https://github.com/aalperen-dev/spotify/blob/main/project_screenshots/signup_screen.png) | ![App Screenshot](https://github.com/aalperen-dev/spotify/blob/main/project_screenshots/signin_screen.png) |
+
 ![App Screenshot](https://github.com/aalperen-dev/spotify/blob/main/project_screenshots/home_screen.png)
 ![App Screenshot](https://github.com/aalperen-dev/spotify/blob/main/project_screenshots/library_screen.png)
 ![App Screenshot](https://github.com/aalperen-dev/spotify/blob/main/project_screenshots/upload_song_screen.png)
