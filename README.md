@@ -37,15 +37,15 @@ During the development of this project, I learned the following technologies and
 
 ## Screenshots
 
-<table>
+<table style="border:none">
     <tr>
-        <td> <img src="https://github.com/aalperen-dev/spotify/blob/main/project_screenshots/signup_screen.png"></td ><td> <img src="https://github.com/aalperen-dev/spotify/blob/main/project_screenshots/signin_screen.png"> </td>
+        <td style="border:none"> <img src="https://github.com/aalperen-dev/spotify/blob/main/project_screenshots/signup_screen.png"></td ><td> <img src="https://github.com/aalperen-dev/spotify/blob/main/project_screenshots/signin_screen.png"> </td>
     </tr>
     <tr>
-        <td> <img src="https://github.com/aalperen-dev/spotify/blob/main/project_screenshots/home_screen.png"></td ><td> <img src="https://github.com/aalperen-dev/spotify/blob/main/project_screenshots/library_screen.png"> </td>
+        <td style="border:none"> <img src="https://github.com/aalperen-dev/spotify/blob/main/project_screenshots/home_screen.png"></td ><td> <img src="https://github.com/aalperen-dev/spotify/blob/main/project_screenshots/library_screen.png"> </td>
     </tr>
     <tr>
-        <td> <img src="https://github.com/aalperen-dev/spotify/blob/main/project_screenshots/upload_song_screen.png"></td ><td> <img src="https://github.com/aalperen-dev/spotify/blob/main/project_screenshots/music_player.png"> </td>
+        <td style="border:none"> <img src="https://github.com/aalperen-dev/spotify/blob/main/project_screenshots/upload_song_screen.png"></td ><td> <img src="https://github.com/aalperen-dev/spotify/blob/main/project_screenshots/music_player.png"> </td>
     </tr>
 </table>
 
