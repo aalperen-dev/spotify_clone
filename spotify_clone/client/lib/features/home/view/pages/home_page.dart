@@ -22,16 +22,14 @@ class _HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Stack(
-          children: [
-            pages[selectedIndex],
-            const Positioned(
-              bottom: 0,
-              child: MusicSlab(),
-            ),
-          ],
-        ),
+      body: Stack(
+        children: [
+          pages[selectedIndex],
+          const Positioned(
+            bottom: 0,
+            child: MusicSlab(),
+          ),
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: selectedIndex,

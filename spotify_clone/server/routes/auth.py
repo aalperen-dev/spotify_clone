@@ -38,12 +38,7 @@ def signup_user(user: UserCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(user_db)
 
-    token = jwt.encode({"id": user_db.id}, "password_key")
-
-    return {
-        "token": token,
-        "user": user_db,
-    }
+    return user_db
 
 
 @router.post("/login")
@@ -61,7 +56,7 @@ def login_user(user: UserLogin, db: Session = Depends(get_db)):
         raise HTTPException(400, "Incorrect password!")
 
     token = jwt.encode({"id": user_db.id}, "password_key")
-    return user_db
+    return {"token": token, "user": user_db}
 
 
 @router.get("/")
