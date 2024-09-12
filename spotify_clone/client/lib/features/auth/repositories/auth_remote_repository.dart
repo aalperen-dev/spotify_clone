@@ -61,7 +61,7 @@ class AuthRemoteRepository {
         }),
       );
       final resBodyMap = jsonDecode(response.body) as Map<String, dynamic>;
-      print(resBodyMap);
+      // print(resBodyMap);
       if (response.statusCode != 200) {
         return Left(AppFailureMsg(resBodyMap['detail']));
       }
@@ -85,7 +85,7 @@ class AuthRemoteRepository {
         },
       );
       final resBodyMap = jsonDecode(response.body) as Map<String, dynamic>;
-      print(resBodyMap);
+      // print(resBodyMap);
       if (response.statusCode != 200) {
         return Left(AppFailureMsg(resBodyMap['detail']));
       }

@@ -6,10 +6,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:spotify/core/providers/current_user_notifier.dart';
 import 'package:spotify/core/theme/theme.dart';
 import 'package:spotify/features/auth/view/pages/login_page.dart';
-import 'package:spotify/features/auth/view/pages/signup_page.dart';
 import 'package:spotify/features/auth/viewmodel/auth_viewmodel.dart';
 import 'package:spotify/features/home/view/pages/home_page.dart';
-import 'package:spotify/features/home/view/pages/upload_song_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,7 +44,6 @@ class MainApp extends ConsumerWidget {
       title: 'Spotify Clone',
       theme: AppTheme.darkThemeMode,
       home: currentUser == null ? const LoginPage() : const HomePage(),
-      // home: const SignupPage(),
     );
   }
 }
