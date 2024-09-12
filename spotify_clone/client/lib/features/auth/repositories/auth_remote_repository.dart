@@ -61,6 +61,7 @@ class AuthRemoteRepository {
         }),
       );
       final resBodyMap = jsonDecode(response.body) as Map<String, dynamic>;
+      print(resBodyMap);
       if (response.statusCode != 200) {
         return Left(AppFailureMsg(resBodyMap['detail']));
       }
@@ -71,9 +72,8 @@ class AuthRemoteRepository {
     }
   }
 
-  Future<Either<AppFailureMsg, UserModel>> getCurrentUserData({
-    required String token,
-  }) async {
+  Future<Either<AppFailureMsg, UserModel>> getCurrentUserData(
+      String token) async {
     try {
       final response = await http.get(
         Uri.parse(
@@ -85,10 +85,16 @@ class AuthRemoteRepository {
         },
       );
       final resBodyMap = jsonDecode(response.body) as Map<String, dynamic>;
+      print(resBodyMap);
       if (response.statusCode != 200) {
         return Left(AppFailureMsg(resBodyMap['detail']));
       }
-      return Right(UserModel.fromMap(resBodyMap).copyWith(token: token));
+
+      return Right(
+        UserModel.fromMap(resBodyMap).copyWith(
+          token: token,
+        ),
+      );
     } catch (e) {
       return Left(AppFailureMsg(e.toString()));
     }

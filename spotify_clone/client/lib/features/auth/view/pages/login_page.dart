@@ -26,30 +26,27 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
-    formKey.currentState!.validate();
   }
 
   @override
   Widget build(BuildContext context) {
-    final isLoading = ref.watch(authViewModelProvider.select(
-      (value) => value?.isLoading == true,
-    ));
+    final isLoading = ref
+        .watch(authViewModelProvider.select((val) => val?.isLoading == true));
+
     ref.listen(
       authViewModelProvider,
       (_, next) {
         next?.when(
           data: (data) {
-            Navigator.of(context).pushAndRemoveUntil(
+            Navigator.pushAndRemoveUntil(
+              context,
               MaterialPageRoute(
                 builder: (context) => const HomePage(),
               ),
               (_) => false,
             );
           },
-          error: (error, stackTrace) {
-            AppUtilities.showSnackBar(
-                context: context, content: error.toString());
-          },
+          error: (error, st) {},
           loading: () {},
         );
       },
@@ -102,12 +99,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                     email: emailController.text,
                                     password: passwordController.text,
                                   );
-                            } else {
-                              AppUtilities.showSnackBar(
-                                context: context,
-                                content: 'Missing fields!',
-                              );
-                            }
+                            } else {}
                           },
                         ),
                       ),

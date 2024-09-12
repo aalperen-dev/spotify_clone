@@ -19,7 +19,7 @@ class MusicSlab extends ConsumerWidget {
     ));
 
     if (currentSong == null) {
-      return const SizedBox.shrink();
+      return const SizedBox();
     }
 
     return GestureDetector(
@@ -141,7 +141,7 @@ class MusicSlab extends ConsumerWidget {
               stream: songNotifier.audioPlayer?.positionStream,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const SizedBox.shrink();
+                  return const SizedBox();
                 }
 
                 final position = snapshot.data;

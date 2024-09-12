@@ -49,7 +49,10 @@ class UserModel {
       name: map['name'] ?? '',
       token: map['token'] ?? '',
       favoriteSongs: List<FavoriteSongsModel>.from(
-          map['favoriteSongs']?.map((x) => FavoriteSongsModel.fromMap(x))),
+        (map['favorites'] ?? []).map(
+          (x) => FavoriteSongsModel.fromMap(x as Map<String, dynamic>),
+        ),
+      ),
     );
   }
 

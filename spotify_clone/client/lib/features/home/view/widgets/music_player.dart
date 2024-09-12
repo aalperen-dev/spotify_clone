@@ -51,12 +51,13 @@ class MusicPlayer extends ConsumerWidget {
           ),
         ),
         body: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             //
             Expanded(
-              flex: 5,
+              flex: 4,
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 30),
+                padding: const EdgeInsets.symmetric(vertical: 20),
                 child: Hero(
                   tag: 'music-image',
                   child: Container(
@@ -79,6 +80,7 @@ class MusicPlayer extends ConsumerWidget {
                   Row(
                     children: [
                       Column(
+                        mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
@@ -126,14 +128,14 @@ class MusicPlayer extends ConsumerWidget {
                     ],
                   ),
                   //
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 5),
                   //
                   StreamBuilder(
                       stream: songNotifier.audioPlayer!.positionStream,
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
-                          return const SizedBox.shrink();
+                          return const SizedBox();
                         }
 
                         final position = snapshot.data;
@@ -191,7 +193,7 @@ class MusicPlayer extends ConsumerWidget {
                         );
                       }),
                   //
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 5),
                   //
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -237,7 +239,7 @@ class MusicPlayer extends ConsumerWidget {
                     ],
                   ),
                   //
-                  const SizedBox(height: 25),
+                  const SizedBox(height: 5),
                   //
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

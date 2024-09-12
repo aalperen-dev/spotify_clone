@@ -15,7 +15,7 @@ class AuthLocalRepository {
     _sharedPreferences = await SharedPreferences.getInstance();
   }
 
-  void setToken({required String? token}) {
+  void setToken(String? token) {
     if (token != null) {
       _sharedPreferences.setString('x-auth-token', token);
     }

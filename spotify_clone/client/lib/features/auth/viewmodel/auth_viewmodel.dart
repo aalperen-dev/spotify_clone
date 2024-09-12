@@ -42,6 +42,7 @@ class AuthViewModel extends _$AuthViewModel {
           AsyncValue.error(l.message, StackTrace.current),
       Right(value: final r) => state = AsyncValue.data(r),
     };
+    print(val);
   }
 
   Future<void> loginUser({
@@ -57,35 +58,39 @@ class AuthViewModel extends _$AuthViewModel {
     final val = switch (res) {
       Left(value: final l) => state =
           AsyncValue.error(l.message, StackTrace.current),
-      Right(value: final r) => _loginSuccess(userModel: r),
+      Right(value: final r) => _loginSuccess(r),
     };
+    print(val);
   }
 
-  AsyncValue<UserModel>? _loginSuccess({required UserModel userModel}) {
-    _authLocalRepository.setToken(token: userModel.token);
-    _currentUserNotifier.addUser(userModel);
-    return state = AsyncValue.data(userModel);
+  AsyncValue<UserModel>? _loginSuccess(UserModel user) {
+    _authLocalRepository.setToken(user.token);
+    _currentUserNotifier.addUser(user);
+    return state = AsyncValue.data(user);
   }
 
   Future<UserModel?> getData() async {
     state = const AsyncValue.loading();
     final token = _authLocalRepository.getToken();
-    if (token != null) {
-      final res = await _authRemoteRepository.getCurrentUserData(token: token);
 
+    if (token != null) {
+      final res = await _authRemoteRepository.getCurrentUserData(token);
       final val = switch (res) {
-        Left(value: final l) => state =
-            AsyncValue.error(l.message, StackTrace.current),
+        Left(value: final l) => state = AsyncValue.error(
+            l.message,
+            StackTrace.current,
+          ),
         Right(value: final r) => _getDataSuccess(r),
       };
-      // print(val.value);
+
       return val.value;
     }
+
     return null;
   }
 
-  AsyncValue<UserModel> _getDataSuccess(UserModel userModel) {
-    _currentUserNotifier.addUser(userModel);
-    return state = AsyncValue.data(userModel);
+  AsyncValue<UserModel> _getDataSuccess(UserModel user) {
+    _currentUserNotifier.addUser(user);
+    return state = AsyncValue.data(user);
   }
 }
