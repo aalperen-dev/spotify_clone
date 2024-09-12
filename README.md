@@ -6,9 +6,9 @@ This project is a clone of a [YouTube video](https://www.youtube.com/watch?v=CWv
 
 During the development of this project, I learned the following technologies and techniques:
 
- - Riverpod Generators: Used for state management in Flutter.
+- Riverpod Generators: Used for state management in Flutter.
 
- - Backend Development with FastAPI: Set up a backend service to handle API requests and responses.
+- Backend Development with FastAPI: Set up a backend service to handle API requests and responses.
 
 - Connecting to APIs: Integrated the frontend with backend APIs to fetch and display data.
 
@@ -29,23 +29,27 @@ During the development of this project, I learned the following technologies and
 
 ### Backend
 
-- **FastAPI**:  Used FastAPI for setting up the backend services and handling API requests.
-- **Cloudinary**:  Utilized Cloudinary for cloud storage and media management.
+- **FastAPI**: Used FastAPI for setting up the backend services and handling API requests.
+- **Cloudinary**: Utilized Cloudinary for cloud storage and media management.
 
 ### Local Storage
-- **Hive**:  Used Hive for local storage to manage and persist data on the device.
+
+- **Hive**: Used Hive for local storage to manage and persist data on the device.
 
 ## Screenshots
 
-<table style="border:none">
+<table style="border-collapse: collapse; border: none; width: 100%;">
     <tr>
-        <td style="border:none"> <img src="https://github.com/aalperen-dev/spotify/blob/main/project_screenshots/signup_screen.png"></td ><td> <img src="https://github.com/aalperen-dev/spotify/blob/main/project_screenshots/signin_screen.png"> </td>
+        <td style="border: none; padding: 8px; text-align: left;"> <img src="https://github.com/aalperen-dev/spotify/blob/main/project_screenshots/signup_screen.png"></td >
+        <td style="border: none; padding: 8px; text-align: left;"> <img src="https://github.com/aalperen-dev/spotify/blob/main/project_screenshots/signin_screen.png"> </td>
     </tr>
     <tr>
-        <td style="border:none"> <img src="https://github.com/aalperen-dev/spotify/blob/main/project_screenshots/home_screen.png"></td ><td> <img src="https://github.com/aalperen-dev/spotify/blob/main/project_screenshots/library_screen.png"> </td>
+        <td style="border: none; padding: 8px; text-align: left;"> <img src="https://github.com/aalperen-dev/spotify/blob/main/project_screenshots/home_screen.png"></td >
+        <td style="border: none; padding: 8px; text-align: left;"> <img src="https://github.com/aalperen-dev/spotify/blob/main/project_screenshots/library_screen.png"> </td>
     </tr>
     <tr>
-        <td style="border:none"> <img src="https://github.com/aalperen-dev/spotify/blob/main/project_screenshots/upload_song_screen.png"></td ><td> <img src="https://github.com/aalperen-dev/spotify/blob/main/project_screenshots/music_player.png"> </td>
+        <td style="border: none; padding: 8px; text-align: left;"> <img src="https://github.com/aalperen-dev/spotify/blob/main/project_screenshots/upload_song_screen.png"></td >
+        <td style="border: none; padding: 8px; text-align: left;"> <img src="https://github.com/aalperen-dev/spotify/blob/main/project_screenshots/music_player.png"> </td>
     </tr>
 </table>
 
